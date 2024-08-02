@@ -1,3 +1,4 @@
+
 #import "CMIFColorMatrixImageFilter.h"
 #import "CMIFImageView.h"
 
@@ -44,7 +45,7 @@ static CIContext* context;
                                 kCIImageProperties: [NSNull null],
                                 kCIContextWorkingColorSpace: [NSNull null]};
 
-      context = [CMIFColorMatrixImageFilter createContextWithOptions:options];
+      context = [CIContext contextWithOptions:options];
     });
 
     _filter = [CIFilter filterWithName:@"CIColorMatrix"];
@@ -206,14 +207,6 @@ static CIContext* context;
   }
 
   return nil;
-}
-
-+ (CIContext *)createContextWithOptions:(nullable NSDictionary<NSString *, id> *)options
-{
-  EAGLContext *eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
-  eaglContext = eaglContext ?: [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-
-  return [CIContext contextWithEAGLContext:eaglContext options:options];
 }
 
 #ifdef RCT_NEW_ARCH_ENABLED
